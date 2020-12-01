@@ -1,45 +1,19 @@
-# Focal Loss for Dense Rotation Object Detection
+# Learning Modulated Loss for Rotated Object Detection
 
 ## Abstract
-This repo is based on [Focal Loss for Dense Object Detection](https://arxiv.org/pdf/1708.02002.pdf), and it is completed by [YangXue](https://github.com/yangxue0827).
+This repo is based on [Learning Modulated Loss for Rotated Object Detection](https://arxiv.org/pdf/1911.08299.pdf), 
+and it is completed by [Qianwen](https://github.com/Mrqianduoduo/).
+
+Thanks for yangxue(https://github.com/yangxue0827/) who helps me a lot.
 
 ## Performance
 ### DOTA1.0
-| Model |    Backbone    |    Training data    |    Val data    |    mAP   | GPU | Image/GPU | Anchor | Reg. Loss| lr schd | Angle Constraint | Data Augmentation | configs |
-|:------------:|:------------:|:------------:|:---------:|:-----------:|:----------:|:-----------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|
-| RetinaNet (baseline) | ResNet50_v1 600->800 | DOTA1.0 trainval | DOTA1.0 test | 53.17 | 8X GeForce RTX 2080 Ti | 1 | H | smooth L1 | 1x | No | No | cfgs_res50_dota_v3.py |
-| RetinaNet (baseline) | ResNet50_v1 600->800 | DOTA1.0 trainval | DOTA1.0 test | 62.22 | **1X** GeForce RTX 2080 Ti | 1 | H | smooth L1 | 1x | No | No | cfgs_res50_dota_v4.py |
-| RetinaNet (baseline) | ResNet50_v1 600->800 | DOTA1.0 trainval | DOTA1.0 test | 62.79 | 8X GeForce RTX 2080 Ti | 1 | H | smooth L1 | **2x** | No | No | cfgs_res50_dota_v8.py |
-| RetinaNet (baseline) | ResNet50_v1 **800->1024** | DOTA1.0 trainval | DOTA1.0 test | 60.32 | 8X GeForce RTX 2080 Ti | 1 | H | smooth L1 | 2x | No | No | cfgs_res50_dota_v14.py |
-| RetinaNet (baseline) | **ResNet101_v1** 600->800 | DOTA1.0 trainval | DOTA1.0 test | 64.19 | 1X GeForce RTX 2080 Ti | 1 | H | smooth L1 | 1x | No | No | cfgs_res101_dota_v9.py |
-| RetinaNet (baseline) | **ResNet152_v1** 600->800 | DOTA1.0 trainval | DOTA1.0 test | 65.79 | 8X GeForce RTX 2080 Ti | 1 | H | smooth L1 | 2x | No | No | cfgs_res152_dota_v12.py |
-|  |  |  |  |  |  |  |  |  |  |  |  |  |
-| RetinaNet (baseline) | ResNet50_v1 600->800 | DOTA1.0 trainval | DOTA1.0 test | 61.94 | 1X GeForce RTX 2080 Ti | 1 | R | smooth L1 | 1x | No | No | cfgs_res50_dota_v1.py |
-| RetinaNet (baseline) | ResNet50_v1 600->800 | DOTA1.0 trainval | DOTA1.0 test | 62.25 | **8X** GeForce RTX 2080 Ti | 1 | R | smooth L1 | **2x** | No | No | cfgs_res50_dota_v10.py |
-| RetinaNet | ResNet50_v1 600->800 | DOTA1.0 trainval | DOTA1.0 test | 62.69 | 1X GeForce RTX 2080 Ti | 1 | R | **iou-smooth L1** | 1x | No | No | cfgs_res50_dota_v5.py |
+mAP: 0.6687058601615324
+ap of each class: plane:0.8878331545311091, baseball-diamond:0.6962231464499975, bridge:0.44458338981056794, ground-track-field:0.6432950394052023, small-vehicle:0.6795123578210454, large-vehicle:0.6020451193878097, ship:0.7612468381585155, tennis-court:0.90845010252905, basketball-court:0.7784977406333061, storage-tank:0.7638777969030915, soccer-ball-field:0.5521381565847773, roundabout:0.6047706037636372, harbor:0.5988219351889964, swimming-pool:0.6377906405858327, helicopter:0.47150188067004956
 
-![1](demo1.png)
+### model zoo
+we propose our baseline model with out any data augmentation and refinement.
 
-![2](demo2.png)
-
-## My Development Environment
-1、python3.5 (anaconda recommend)               
-2、cuda 9.0                     
-3、[opencv(cv2)](https://pypi.org/project/opencv-python/)       
-4、[tfplot 0.2.0](https://github.com/wookayin/tensorflow-plot) (optional)            
-5、tensorflow 1.12       
-              
-## IoU-smooth L1 Loss
-**[SCRDet: Towards More Robust Detection for Small, Cluttered and Rotated Objects (ICCV2019)](https://arxiv.org/abs/1811.07126)**    
-
-![1](example.png)
-
-![2](iou_smooth_l1_loss.png)             
-
-## Download Model
-### Pretrain weights
-1、Please download [resnet50_v1](http://download.tensorflow.org/models/resnet_v1_50_2016_08_28.tar.gz), [resnet101_v1](http://download.tensorflow.org/models/resnet_v1_101_2016_08_28.tar.gz) pre-trained models on Imagenet, put it to data/pretrained_weights.       
-2、Or you can choose to use a better backbone, refer to [gluon2TF](https://github.com/yangJirui/gluon2TF). [Pretrain Model Link](https://pan.baidu.com/s/1GpqKg0dOaaWmwshvv1qWGg), password: 5ht9. **(Recommend)**
 
 ## Compile
 ```  
@@ -87,20 +61,4 @@ python multi_gpu_train.py
 cd $PATH_ROOT/tools
 python test_dota.py --test_dir='/PATH/TO/IMAGES/'  
                     --gpus=0,1,2,3,4,5,6,7          
-``` 
-
-## Tensorboard
 ```  
-cd $PATH_ROOT/output/summary
-tensorboard --logdir=.
-``` 
-
-![3](images.png)
-
-![4](scalars.png)
-
-## Reference
-1、https://github.com/endernewton/tf-faster-rcnn   
-2、https://github.com/zengarden/light_head_rcnn   
-3、https://github.com/tensorflow/models/tree/master/research/object_detection    
-4、https://github.com/fizyr/keras-retinanet     
