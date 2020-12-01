@@ -14,6 +14,10 @@ ap of each class: plane:0.8878331545311091, baseball-diamond:0.6962231464499975,
 ### model zoo
 we propose our baseline model with out any data augmentation and refinement.
 
+https://pan.baidu.com/s/1lT9t6Lr7-xrmOijSB9QK-Q
+
+b640
+
 
 ## Compile
 ```  
