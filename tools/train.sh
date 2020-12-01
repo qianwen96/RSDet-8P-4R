@@ -1,0 +1,1 @@
+srun --mpi=pmi2 -p VI_UC_1080TI -n1 --gres=gpu:8 --ntasks-per-node=8 -x SH-IDC1-10-5-30-100 -u python multi_gpu_train.py

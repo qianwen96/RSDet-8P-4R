@@ -1,0 +1,1 @@
+srun --mpi=pmi2 -p VI_MODEL_1080TI -n1 --gres=gpu:8 --ntasks-per-node=8 -u python test_dota.py --test_dir='/mnt/lustre/qianwen/data/dota/test/images/images/'  --gpus=0,1,2,3,4,5,6,7

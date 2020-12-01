@@ -1,0 +1,1 @@
+srun --mpi=pmi2 -p VI_UC_1080TI -n1 --gres=gpu:0 --ntasks-per-node=1 python convert_data_to_tfrecord.py --VOC_dir='/mnt/lustre/qianwen/data/dota/train_clip/' --xml_dir='labeltxt' --image_dir='images' --save_name='train' --img_format='.png' --dataset='DOTA'
