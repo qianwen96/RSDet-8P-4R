@@ -4,7 +4,7 @@
 [![arXiv](http://img.shields.io/badge/cs.CV-arXiv%3A1911.08299-B31B1B.svg)](https://arxiv.org/abs/1911.08299)
 
 ## Abstract
-This is a tensorflow-based rotation detection method, called RSDet. 
+Code for AAAI 2021 paper (RSDet): Learning Modulated Loss for Rotated Object Detection. 
 RSDet is completed by [Qianwen](https://github.com/Mrqianduoduo/).
 
 Thanks for [yangxue](https://github.com/yangxue0827/) who helps me a lot.
@@ -14,8 +14,8 @@ We also provide a modified version in a [rotation detection benchmark](https://g
 ### DOTA1.0
 | Model |  Neck  |    Backbone    |    Training/test dataset    |    mAP   | Model Link | Anchor | Angle Pred. | Reg. Loss| Angle Range | Data Augmentation | Configs |      
 |:------------:|:------------:|:------------:|:------------:|:-----------:|:----------:|:-----------:|:-----------:|:-----------:|:---------:|:---------:|:---------:|    
-| [RetinaNet-H](https://arxiv.org/abs/1908.05612) | FPN | ResNet50_v1d 600->800 | DOTA1.0 trainval/test | 64.17 | [Baidu Drive (j5l0)](https://pan.baidu.com/s/1Qh_LE6QeGsOBYqMzjAESsA) | H | Reg. | smooth L1 | **180** | × | - |
-| [RetinaNet-H](https://arxiv.org/abs/1908.05612) | FPN | ResNet50_v1d 600->800 | DOTA1.0 trainval/test | 65.73 | [Baidu Drive (jum2)](https://pan.baidu.com/s/19-hEtCGxLfYuluTATQJpdg) | H | Reg. | smooth L1 | **90** | × | - |
+| [RetinaNet-H](https://github.com/DetectionTeamUCAS/RetinaNet_Tensorflow_Rotation) | FPN | ResNet50_v1d 600->800 | DOTA1.0 trainval/test | 64.17 | [Baidu Drive (j5l0)](https://pan.baidu.com/s/1Qh_LE6QeGsOBYqMzjAESsA) | H | Reg. | smooth L1 | **180** | × | - |
+| [RetinaNet-H](https://github.com/DetectionTeamUCAS/RetinaNet_Tensorflow_Rotation) | FPN | ResNet50_v1d 600->800 | DOTA1.0 trainval/test | 65.73 | [Baidu Drive (jum2)](https://pan.baidu.com/s/19-hEtCGxLfYuluTATQJpdg) | H | Reg. | smooth L1 | **90** | × | - |
 | [RSDet](https://arxiv.org/pdf/1911.08299) | FPN | ResNet50_v1d 600->800 | DOTA1.0 trainval/test | 66.87 | [Baidu Drive (6nt5)](https://pan.baidu.com/s/1-4iXqRMvCOIEtrMFwtXyew) | H | Reg. | modulated loss | - | × | [cfgs_res50_dota_rsdet_v2.py](./libs/configs/DOTA/rsdet/cfgs_res50_dota_rsdet_v2.py) |
 
 ## My Development Environment
