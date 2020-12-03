@@ -1,5 +1,6 @@
 # Learning Modulated Loss for Rotated Object Detection
 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![arXiv](http://img.shields.io/badge/cs.CV-arXiv%3A1911.08299-B31B1B.svg)](https://arxiv.org/abs/1911.08299)
 
 ## Abstract
@@ -7,7 +8,7 @@ This is a tensorflow-based rotation detection method, called RSDet.
 RSDet is completed by [Qianwen](https://github.com/Mrqianduoduo/).
 
 Thanks for [yangxue](https://github.com/yangxue0827/) who helps me a lot.
-And we also provide a modified version in rotation detection [benchmark](https://github.com/yangxue0827/RotationDetection), which achieve better perfirmance.
+We also provide a modified version in a [rotation detection benchmark](https://github.com/yangxue0827/RotationDetection), which achieve better perfirmance.
 
 ## Performance
 ### DOTA1.0
