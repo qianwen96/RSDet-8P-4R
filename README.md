@@ -1,22 +1,40 @@
 # Learning Modulated Loss for Rotated Object Detection
 
-## Abstract
-This repo is based on [Learning Modulated Loss for Rotated Object Detection](https://arxiv.org/pdf/1911.08299.pdf), 
-and it is completed by [Qianwen](https://github.com/Mrqianduoduo/).
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-Thanks for yangxue(https://github.com/yangxue0827/) who helps me a lot.
+
+## Abstract
+This is a tensorflow-based rotation detection benchmark, also called RSDet. 
+RSDet is completed by [Qianwen](https://github.com/Mrqianduoduo/).
+
+Thanks for yangxue[https://github.com/yangxue0827/] who helps me a lot.
+And we also provide a modified version in benchmark https://github.com/yangxue0827/RotationDetection, which achieve better perfirmance.
 
 ## Performance
 ### DOTA1.0
-mAP: 0.6687058601615324
-ap of each class: plane:0.8878331545311091, baseball-diamond:0.6962231464499975, bridge:0.44458338981056794, ground-track-field:0.6432950394052023, small-vehicle:0.6795123578210454, large-vehicle:0.6020451193878097, ship:0.7612468381585155, tennis-court:0.90845010252905, basketball-court:0.7784977406333061, storage-tank:0.7638777969030915, soccer-ball-field:0.5521381565847773, roundabout:0.6047706037636372, harbor:0.5988219351889964, swimming-pool:0.6377906405858327, helicopter:0.47150188067004956
 
-### model zoo
-we propose our baseline model with out any data augmentation and refinement.
+| [RetinaNet-H](https://arxiv.org/abs/1908.05612) | FPN | ResNet50_v1d 600->800 | DOTA1.0 trainval/test | 64.17 | [Baidu Drive (j5l0)](https://pan.baidu.com/s/1Qh_LE6QeGsOBYqMzjAESsA) | H | Reg. | smooth L1 | **180** | × | [cfgs_res50_dota_v15.py](./libs/configs/DOTA/retinanet/cfgs_res50_dota_v15.py) |
+| [RetinaNet-H](https://arxiv.org/abs/1908.05612) | FPN | ResNet50_v1d 600->800 | DOTA1.0 trainval/test | 65.73 | [Baidu Drive (jum2)](https://pan.baidu.com/s/19-hEtCGxLfYuluTATQJpdg) | H | Reg. | smooth L1 | **90** | × | [cfgs_res50_dota_v4.py](./libs/configs/DOTA/retinanet/cfgs_res50_dota_v4.py) |
+| [RSDet](https://arxiv.org/pdf/1911.08299) | FPN | ResNet50_v1d 600->800 | DOTA1.0 trainval/test | 66.87 | [Baidu Drive (6nt5)](https://pan.baidu.com/s/1-4iXqRMvCOIEtrMFwtXyew) | H | Reg. | modulated loss | - | × | [cfgs_res50_dota_rsdet_v2.py](./libs/configs/DOTA/rsdet/cfgs_res50_dota_rsdet_v2.py) |
 
-https://pan.baidu.com/s/1lT9t6Lr7-xrmOijSB9QK-Q
+## My Development Environment
+**docker images: docker pull yangxue2docker/yx-tf-det:tensorflow1.13.1-cuda10-gpu-py3**      
+1. python3.5 (anaconda recommend)               
+2. cuda 10.0                     
+3. [opencv(cv2)](https://pypi.org/project/opencv-python/)       
+4. [tfplot 0.2.0](https://github.com/wookayin/tensorflow-plot) (optional)            
+5. tensorflow-gpu 1.13
+6. tqdm 4.54.0
+7. Shapely 1.7.1
 
-b640
+## Download Model
+### Pretrain weights
+1. Please download [resnet50_v1](http://download.tensorflow.org/models/resnet_v1_50_2016_08_28.tar.gz), [resnet101_v1](http://download.tensorflow.org/models/resnet_v1_101_2016_08_28.tar.gz), [resnet152_v1](http://download.tensorflow.org/models/resnet_v1_152_2016_08_28.tar.gz), [efficientnet](https://github.com/tensorflow/tpu/tree/master/models/official/efficientnet), [mobilenet_v2](https://storage.googleapis.com/mobilenet_v2/checkpoints/mobilenet_v2_1.0_224.tgz), darknet53 ([Baidu Drive (1jg2)](https://pan.baidu.com/s/1p8V9aaivo9LNxa_OjXjUwA), [Google Drive](https://drive.google.com/drive/folders/1zyg1bvdmLxNRIXOflo_YmJjNJdpHX2lJ?usp=sharing)) pre-trained models on Imagenet, put them to $PATH_ROOT/dataloader/pretrained_weights.       
+2. **(Recommend in this repo)** Or you can choose to use better backbones (resnet_v1d), refer to [gluon2TF](https://github.com/yangJirui/gluon2TF).    
+* [Baidu Drive (b640)](https://pan.baidu.com/s/1lT9t6Lr7-xrmOijSB9QK-Q)              
+
+### Trained weights
+1. Please download trained models by this project, then put them to $PATH_ROOT/output/pretained_weights.
 
 
 ## Compile
@@ -66,3 +84,15 @@ cd $PATH_ROOT/tools
 python test_dota.py --test_dir='/PATH/TO/IMAGES/'  
                     --gpus=0,1,2,3,4,5,6,7          
 ```  
+
+
+## Citation
+
+If you find our code useful for your research, please consider cite.
+@article{qian2019learning,
+    title={Learning modulated loss for rotated object detection},
+    author={Qian, Wen and Yang, Xue and Peng, Silong and Guo, Yue and Yan, Chijun},
+    journal={arXiv preprint arXiv:1911.08299},
+    year={2019}
+}
+
